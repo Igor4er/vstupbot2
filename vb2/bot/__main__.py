@@ -1,4 +1,4 @@
-from config import dp, bot
+from .config import dp, bot
 from aiogram import executor
 
 @dp.message_handler(commands=['start'])
