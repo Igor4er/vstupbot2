@@ -123,6 +123,8 @@ celerybeat.pid
 # Environments
 vb2/.env
 .venv
+.vscode/
+.idea/
 env/
 venv/
 ENV/
