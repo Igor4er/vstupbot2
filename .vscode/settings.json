@@ -1,0 +1,19 @@
+{
+    "python.pythonPath": "C:/path/to/python3.11/python.exe",
+    "python.autoComplete.addBrackets": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.autoComplete.addBrackets": true,
+    "python.autoComplete.addCallParenthesis": true,
+    "python.formatting.provider": "black",
+    "python.autoComplete.addCallParenthesis": true,
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.envFile": [
+        "${workspaceFolder}/.env",
+        "${workspaceFolder}/.env.local"
+    ],
+    "python.envFileParsing": "dotenv",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/../vb2/"
+    ]
+}
