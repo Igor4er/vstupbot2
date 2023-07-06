@@ -1,4 +1,4 @@
-from vb2.parser.supabase import insert_category_into_base
+from vb2.common.db import insert_category_into_base
 from tqdm import tqdm
 
 
@@ -8,7 +8,7 @@ def list_specs() -> list:
         for line in f.readlines():
             if not line[0].isdigit():
                 if len(line) > 5:
-                    specs.append(line)
+                    specs.append(line.replace("\n", ""))
         return specs
 
 

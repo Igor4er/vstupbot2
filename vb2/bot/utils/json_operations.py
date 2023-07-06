@@ -1,5 +1,7 @@
 import os
 import json
+from vb2.common.db import users
+from vb2.common.dto import Users
 
 
 def change_dir(dir, rep):
@@ -13,33 +15,31 @@ def change_dir(dir, rep):
     os.chdir(directory)
 
 
-def add_user(query):
-    """ It's kludge for storing user data in json while DB isn't ready"""
-    change_dir('utils', 'user')
-    path = "users.json"
-    with open(path, "w", encoding='utf-8') as file:
-        user = query['from']
-        row = {f"{user['id']}": {
-            "first_name": user['first_name'],
-            "last_name": user['last_name'],
-            "username": user['username'],
-            "language": query.data
-        }}
-        json.dump(row, file, ensure_ascii=False)
+async def add_user(query):
+    """DB is here now!!!"""
+    user = query['from']
+    row = {
+        "uuid": user['id'],
+        "first_name": user['first_name'],
+        "last_name": user['last_name'],
+        "username": user['username'],
+        "language": query.data
+    }
+    await users.insert_row(Users(**row))
 
 
-def load_user(message):
-    """ It's kludge for storing user data in json while DB isn't ready"""
-    change_dir('utils', 'user')
-    path = "users.json"
-    with open(path, encoding='utf-8') as file:
-        users = json.load(file)
-        return users[str(message.from_user.id)]["language"]
+async def load_user(message):
+    """"HI, DB!"""
+    uuid = message.from_user.id
+    user: Users = users.get_by_id(uuid=uuid)
+    if user is not None:
+        return user.language
+    return None
 
 
-def load_text(message):
+async def load_text(message):
     try:
-        language = load_user(message)
+        language = await load_user(message)
     except:
         language = "ua"
     change_dir('utils', 'text')
