@@ -2,8 +2,8 @@ from pydantic import BaseModel
 
 
 class SupaBase(BaseModel):
-    uuid: str | None
-    created_at: str | None
+    uuid: str | int | None
+    created_at: str | None = None
     
     def zero(self):
         self.uuid = None
@@ -32,6 +32,6 @@ class Specialities(SupaBase):
 
 class Users(SupaBase):
     first_name: str
-    last_name: str
-    username: str
+    last_name: str | None = None
+    username: str | None = None
     language: str

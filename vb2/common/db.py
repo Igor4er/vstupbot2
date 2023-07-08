@@ -45,8 +45,9 @@ class DbTable:
             headers=dict(AUTH_HEADERS)  # dict(AUTH_HEADERS, **PREFER_MINIMAL_RETURN)
         )
         if req.ok:
-            ans = json.loads(req.content.decode("utf-8"))[0]
-            return self.Dto(**ans)
+            ans = json.loads(req.content.decode("utf-8"))
+            if len(ans) == 1:
+                return self.Dto(**ans[0])
         return None
 
     async def insert_row(self, row):
@@ -57,7 +58,7 @@ class DbTable:
         """
         if not isinstance(row, self.Dto):
             raise TypeError(f"row is not {self.Dto.__name__} dto")
-        row.zero()
+        # row.zero()
         req = requests.post(
             f"{settings.DB_URL}/{self.name}",
             json=row.model_dump(),
@@ -88,19 +89,19 @@ class DbTable:
     async def update_or_create(self, row):
         if not isinstance(row, self.Dto):
             raise TypeError(f"row is not {self.Dto.__name__} dto")
-        if self.get_by_id(row) is not None:
-            return self.update_row(row)
+        if await self.get_by_id(row.uuid) is not None:
+            return await self.update_row(row)
         else:
-            return self.insert_row(row)
+            return await self.insert_row(row)
 
     async def get_or_create(self, row):
         if not isinstance(row, self.Dto):
             raise TypeError(f"row is not {self.Dto.__name__} dto")
-        gbi = self.get_by_id(row)
+        gbi = await self.get_by_id(row)
         if gbi is not None:
             return gbi
         else:
-            return self.insert_row(row)
+            return await self.insert_row(row)
 
 
 categories = DbTable(dto=Categories)

@@ -1,4 +1,18 @@
 {
   "GREETINGS": "Hello, my dear friend. Use /help to get more information about me",
-  "HELP": "I can't do anything for my foreign friends for now but my developer is working about some useful features for you"
+  "HELP": "I can't do anything for my foreign friends for now but my developer is working about some useful features for you\nUPD: you can use /config, not everything works, it's still in development",
+  "CONFIGURATION": "User configuration. Choose ",
+  "EXAM": "Choose subject for setting mark",
+  "EXAM_BUTTON": "Examine",
+  "SPEC_BUTTON": "Speciality",
+  "LANG_BUTTON": "Language",
+  "UKRAINIAN": "Ukrainian",
+  "MATH": "Math",
+  "THIRD": "Third subj",
+  "RETURN": "Return⬅\uFE0F",
+  "GET_UA": "Input your NMT mark for Ukrainian language",
+  "GET_MATH": "Input your NMT mark for Math",
+  "CHOOSE_THIRD": "Choose third subject",
+  "GET_THIRD": "Input your NMT mark for {subject}",
+  "SAVED_MARK": "Mark saved"
 }

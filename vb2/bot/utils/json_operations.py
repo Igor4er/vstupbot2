@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 from vb2.common.db import users
 from vb2.common.dto import Users
 
@@ -25,13 +26,13 @@ async def add_user(query):
         "username": user['username'],
         "language": query.data
     }
-    await users.insert_row(Users(**row))
+    await users.update_or_create(Users(**row))
 
 
 async def load_user(message):
     """"HI, DB!"""
     uuid = message.from_user.id
-    user: Users = users.get_by_id(uuid=uuid)
+    user: Users = await users.get_by_id(uuid=uuid)
     if user is not None:
         return user.language
     return None
@@ -40,9 +41,13 @@ async def load_user(message):
 async def load_text(message):
     try:
         language = await load_user(message)
-    except:
+    except Exception as e:
+        # print(e)
         language = "ua"
     change_dir('utils', 'text')
-    path = f"text_{language}.json" # Multi-language support
+    if language is None:
+        path = "text_ua.json"
+    else:
+        path = f"text_{language}.json" # Multi-language support
     with open(path, encoding='utf-8') as file:
         return json.load(file)
