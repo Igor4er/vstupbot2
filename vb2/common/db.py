@@ -50,6 +50,21 @@ class DbTable:
                 return self.Dto(**ans[0])
         return None
 
+    def all(self) -> list | None:
+        req = requests.get(
+            f"{settings.DB_URL}/{self.name}",
+            params={"select": "*"},
+            headers=dict(AUTH_HEADERS)  # dict(AUTH_HEADERS, **PREFER_MINIMAL_RETURN)
+        )
+        if req.ok:
+            alls = []
+            ans = json.loads(req.content.decode("utf-8"))
+            for an in ans:
+                alls.append(self.Dto(**an))
+            return alls
+        else:
+            return None
+
     async def insert_row(self, row):
         """
         Вставляє рядок в базу.
@@ -102,6 +117,17 @@ class DbTable:
             return gbi
         else:
             return await self.insert_row(row)
+
+    async def filter(self, filters: list) -> list:
+        """
+        Фільтрує всі записи в бд по списку фльтрів.
+        :param filters: Список lambda функцій, якій приймають dto, і вертають bool
+        :return: То що відфільтрувалось по фільрам
+        """
+        dtos = self.all()
+        for ft in filters:
+            dtos = list(filter(ft, dtos))
+        return dtos
 
 
 categories = DbTable(dto=Categories)
