@@ -27,7 +27,7 @@ class Coeficients(SupaBase):
 class Specialities(SupaBase):
     code: str
     name: str
-    category: Categories
+    category: str
 
 
 class Users(SupaBase):

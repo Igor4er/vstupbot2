@@ -15,8 +15,9 @@
   "BIO": "Biology",
   "CHEMISTRY": "Chemistry",
   "RETURN": "Return⬅\uFE0F",
-  "GET_UA": "Input your NMT mark for {subject}",
+  "GET": "Input your NMT mark for {subject}",
   "CHOOSE_THIRD": "Choose third subject",
   "GET_THIRD": "Input your NMT mark for {subject}",
-  "SAVED_MARK": "Mark saved"
+  "SAVED_MARK": "Mark saved",
+  "CHOOSE_CAT": "Choose category, so You can get a list of specialities. Categories and specialities names are in Ukrainian"
 }

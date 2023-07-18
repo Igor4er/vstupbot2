@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from vb2.settings import settings
-from handlers import start, configure
+from handlers import start, configure, exam, spec
 
 # Configure telegram bot
 bot = Bot(token=settings.TOKEN)
@@ -12,6 +12,8 @@ dp = Dispatcher(bot, storage=storage)
 def __register_handlers(dp):
     start.register(dp)
     configure.register(dp)
+    exam.register(dp)
+    spec.register(dp)
 
 
 if __name__ == "__main__":

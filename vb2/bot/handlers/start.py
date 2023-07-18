@@ -1,6 +1,6 @@
 from aiogram import Dispatcher
 from vb2.bot.markup import start_markup
-from vb2.bot.utils.db_operations import load_text
+from vb2.bot.utils.user_operations import load_text
 
 
 async def start(message):
