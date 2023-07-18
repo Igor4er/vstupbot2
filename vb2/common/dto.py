@@ -2,12 +2,12 @@ from pydantic import BaseModel
 
 
 class SupaBase(BaseModel):
-    uuid: str | int | None
+    uuid: str | int | None = None
     created_at: str | None = None
-    
-    # def zero(self):
-    #     self.uuid = None
-    #     self.created_at = None
+
+    def zero(self):
+        self.uuid = None
+        self.created_at = None
 
 
 class Categories(SupaBase):
@@ -22,6 +22,7 @@ class Coeficients(SupaBase):
     physics: float
     chemestry: float
     biology: float
+    speciality: str
 
 
 class Specialities(SupaBase):

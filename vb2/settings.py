@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     DB_KEY: str = "DEFAULT"
     DB_URL: str = "https://tqaqvhepgpsjyetgpzwo.supabase.co/rest/v1"
     LOGCHAT: str = "DEFAULT"
-    
+
     class Config:
         env_prefix: str = "VB_"
 

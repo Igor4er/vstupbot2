@@ -3,30 +3,21 @@ import requests
 import json
 from vb2.common.dto import *
 
-AUTH_HEADERS = {
-    "apikey": settings.DB_KEY,
-    "Authorization": f"Bearer {settings.DB_KEY}"
-}
-PREFER_MINIMAL_RETURN = {
-    "Prefer": "return=minimal"
-}
-TYPE_JSON = {
-    "Content-Type": "application/json"
-}
+AUTH_HEADERS = {"apikey": settings.DB_KEY, "Authorization": f"Bearer {settings.DB_KEY}"}
+PREFER_MINIMAL_RETURN = {"Prefer": "return=minimal"}
+TYPE_JSON = {"Content-Type": "application/json"}
 
 
 def insert_category_into_base(category: str):
     r = requests.post(
         f"{settings.DB_URL}/categories",
-        json={
-            "name": category
-        },
+        json={"name": category},
         headers={
             "apikey": settings.DB_KEY,
             "Authorization": f"Bearer {settings.DB_KEY}",
             "Content-Type": "application/json",
             # "Prefer": "return=minimal",
-        }
+        },
     )
     if not r.ok:
         print(r.status_code)
@@ -42,7 +33,7 @@ class DbTable:
         req = requests.get(
             f"{settings.DB_URL}/{self.name}",
             params={"uuid": f"eq.{uuid}"},
-            headers=dict(AUTH_HEADERS)  # dict(AUTH_HEADERS, **PREFER_MINIMAL_RETURN)
+            headers=dict(AUTH_HEADERS),  # dict(AUTH_HEADERS, **PREFER_MINIMAL_RETURN)
         )
         if req.ok:
             ans = json.loads(req.content.decode("utf-8"))
@@ -54,7 +45,7 @@ class DbTable:
         req = requests.get(
             f"{settings.DB_URL}/{self.name}",
             params={"select": "*"},
-            headers=dict(AUTH_HEADERS)  # dict(AUTH_HEADERS, **PREFER_MINIMAL_RETURN)
+            headers=dict(AUTH_HEADERS),  # dict(AUTH_HEADERS, **PREFER_MINIMAL_RETURN)
         )
         if req.ok:
             alls = []
@@ -76,8 +67,8 @@ class DbTable:
         # row.zero()
         req = requests.post(
             f"{settings.DB_URL}/{self.name}",
-            json=row.model_dump(),
-            headers=dict(AUTH_HEADERS, **TYPE_JSON, **PREFER_MINIMAL_RETURN)
+            json=row.model_dump(exclude=("uuid", "created_at")),
+            headers=dict(AUTH_HEADERS, **TYPE_JSON, **PREFER_MINIMAL_RETURN),
         )
         if req.ok:
             return True
@@ -95,7 +86,7 @@ class DbTable:
             f"{settings.DB_URL}/{self.name}",
             params={"uuid": f"eq.{row.uuid}"},
             json=row.model_dump(),
-            headers=dict(AUTH_HEADERS, **TYPE_JSON, **PREFER_MINIMAL_RETURN)
+            headers=dict(AUTH_HEADERS, **TYPE_JSON, **PREFER_MINIMAL_RETURN),
         )
         if req.ok:
             return True
