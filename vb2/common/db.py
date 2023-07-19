@@ -65,9 +65,12 @@ class DbTable:
         if not isinstance(row, self.Dto):
             raise TypeError(f"row is not {self.Dto.__name__} dto")
         # row.zero()
+        exclude = ("created_at")
+        if self.uuid is None:
+            exclude += ("uuid")
         req = requests.post(
             f"{settings.DB_URL}/{self.name}",
-            json=row.model_dump(exclude=("uuid", "created_at")),
+            json=row.model_dump(exclude=exclude),
             headers=dict(AUTH_HEADERS, **TYPE_JSON, **PREFER_MINIMAL_RETURN),
         )
         if req.ok:
