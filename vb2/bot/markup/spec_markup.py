@@ -24,3 +24,15 @@ async def spec_keyboard(found):
         )
     spec_markup.add(*family)
     return spec_markup
+
+
+async def keyboard(message, uuid):
+    """Propose user to choose searching method"""
+    text = await load_text(message)
+    buttons = types.InlineKeyboardMarkup(row_width=2)
+    buttons.add(
+        types.InlineKeyboardButton(text=text["CALCULATE"], callback_data=f"CALC {uuid}"),
+        types.InlineKeyboardButton(text=text["FOLLOW"], callback_data="FLW"),
+        types.InlineKeyboardButton(text=text["RETURN"], callback_data="SPEC")
+    )
+    return buttons

@@ -1,7 +1,7 @@
 {
-  "GREETINGS": "Hello, my dear friend. Use /help to get more information about me",
-  "HELP": "I can't do anything for my foreign friends for now but my developer is working about some useful features for you\nUPD: you can use /config, not everything works, it's still in development",
-  "CONFIGURATION": "User configuration. Choose ",
+  "GREETINGS": "Привіт. Вітаємо у ВступБоті. Оберіть мову спілкування, за умовчуванням вибрана українська. Щоб ознайомитись з командами введи /help\n\nHello, my dear friend. Choose language you prefer for communication, default is Ukrainian. Use /help to get more information about me\n",
+  "HELP": "You can use /menu, not everything works, it's still in development. For questions contact with developer @VolondeBot",
+  "CONFIGURATION": "User configuration. Press button\n Examine - set your exam marks \n Speciality - search your speciality. In development \n Language - set language for telegram bot",
   "EXAM": "Choose subject for setting mark",
   "EXAM_BUTTON": "Examine",
   "SPEC_BUTTON": "Speciality",
@@ -19,5 +19,13 @@
   "CHOOSE_THIRD": "Choose third subject",
   "GET_THIRD": "Input your NMT mark for {subject}",
   "SAVED_MARK": "Mark saved",
-  "CHOOSE_CAT": "Choose category, so You can get a list of specialities. Categories and specialities names are in Ukrainian"
+  "CHOOSE_CAT": "Choose searching method so You can get a list of specialities. Input specialities names in Ukrainian",
+  "CHOOSE_CODE": "Code",
+  "CHOOSE_SPEC": "Name",
+  "SEARCH_CODE": "Input speciality's code",
+  "SEARCH_WORD": "Input speciality's name",
+  "CHOSEN_SPEC": "Searching finished. I found such list of specialities. You can press button so You would get its identification code. This functionality still in development",
+  "RESULTS": "Конкурсний бал EN",
+  "CALCULATE": "Calculate bulshit",
+  "FOLLOW": "Subscribe to OnlyFans"
 }

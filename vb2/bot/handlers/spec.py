@@ -16,10 +16,12 @@ async def speciality(query: types.CallbackQuery):
 
 async def looking_for_spec(query: types.CallbackQuery):
     text = await load_text(message=query)
-    await query.message.edit_text(text[""])
+
     if query.data == "CODE":
+        await query.message.edit_text(text["SEARCH_CODE"])
         await ChooseSpec.search.set()
     elif query.data == "WORD":
+        await query.message.edit_text(text["SEARCH_WORD"])
         await ChooseSpec.words.set()
 
 
@@ -45,7 +47,9 @@ async def word_spec(message, state:FSMContext):
 async def spec_checking(query: types.CallbackQuery):
     """Show a list of specialities"""
     uuid = query.data.replace("spec ", "")
-    await query.message.answer(uuid)
+    text = await load_text(message=query)
+    markup = await spec_markup.keyboard(message=query, uuid=uuid)
+    await query.message.answer(uuid, reply_markup=markup)
 
 
 def register(dp: Dispatcher):

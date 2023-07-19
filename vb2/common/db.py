@@ -66,7 +66,7 @@ class DbTable:
             raise TypeError(f"row is not {self.Dto.__name__} dto")
         # row.zero()
         exclude = ("created_at")
-        if self.uuid is None:
+        if row.uuid is None:
             exclude += ("uuid")
         req = requests.post(
             f"{settings.DB_URL}/{self.name}",

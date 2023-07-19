@@ -30,7 +30,7 @@ async def set_language(query: types.CallbackQuery):
 
 def register(dp: Dispatcher):
     dp.register_message_handler(
-        commands=["config"], commands_prefix="!/", callback=configure
+        commands=["menu"], commands_prefix="!/", callback=configure
     )
     dp.register_callback_query_handler(configure, lambda query: query.data == "CONF")
     dp.register_callback_query_handler(choose_language, lambda query: query.data == "LANG")

@@ -20,9 +20,9 @@ async def add_user(query):
     user = query["from"]
     try:
         language = query.data
-    except Exception as e:
-        print(e)
+    except:
         language = "ua"
+
     row = {
         "uuid": user["id"],
         "first_name": user["first_name"],
@@ -30,7 +30,6 @@ async def add_user(query):
         "username": user["username"],
         "language": language,
     }
-    print(row)
     await users.update_or_create(Users(**row))
 
 
