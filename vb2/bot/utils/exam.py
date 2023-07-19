@@ -3,11 +3,10 @@ from vb2.common.dto import Results
 
 
 async def update_results(message, data):
-    """DB is here now!!!"""
+    """Method for saving user examine results"""
 
     uuid = message.from_user.id
     result = await results.get_by_id(uuid=uuid)
-    print(result)
     message = message.text
     subject = data.get("subject")
     row = {
@@ -29,5 +28,4 @@ async def update_results(message, data):
         row.update({"math": int(message)})
     else:
         row.update({"third_subject": int(message), "subject_name": subject})
-    print(row)
     await results.update_or_create(Results(**row))

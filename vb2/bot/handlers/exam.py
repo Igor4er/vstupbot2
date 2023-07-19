@@ -9,13 +9,13 @@ from vb2.bot.utils.user_operations import load_text
 async def exam_config(query: types.CallbackQuery):
     text = await load_text(message=query)
     markup = await exam_markup.exam_keyboard(query)
-    await query.message.answer(text["EXAM"], reply_markup=markup)
+    await query.message.edit_text(text["EXAM"], reply_markup=markup)
 
 
 async def choose_subject(query: types.CallbackQuery):
     text = await load_text(message=query)
     markup = await exam_markup.subject_keyboard(query)
-    await query.message.answer(text["EXAM"], reply_markup=markup)
+    await query.message.edit_text(text["EXAM"], reply_markup=markup)
 
 
 async def get_mark(query: types.CallbackQuery, state: FSMContext):

@@ -1,22 +1,26 @@
 from aiogram import types
-from vb2.common.db import categories
+from vb2.bot.utils.user_operations import load_text
 
 
-async def category_keyboard():
-    """Get list of categories from SupaBase and create keyboard for searching specialities by category"""
-    cats = categories.all()
-    cats_markup = types.InlineKeyboardMarkup(row_width=3)
-    family = []
-    for cat in cats:
-        family.append(
-            types.InlineKeyboardButton(text=cat.name, callback_data=f"cat {cat.uuid}")
-        )
-    cats_markup.add(*family)
+async def speciality_keyboard(message):
+    """Propose user to choose searching method"""
+    text = await load_text(message)
+    cats_markup = types.InlineKeyboardMarkup(row_width=2)
+    cats_markup.add(
+        types.InlineKeyboardButton(text=text["CHOOSE_CODE"], callback_data="CODE"),
+        types.InlineKeyboardButton(text=text["CHOOSE_SPEC"], callback_data="WORD"),
+        types.InlineKeyboardButton(text=text["RETURN"], callback_data="CONF")
+    )
     return cats_markup
 
 
-async def spec_keyboard(uuid):
-    pass
-    """ Get list of specialities from SupaBase and create keyboard.
-    Waiting for inserting data to DB 
-    """
+async def spec_keyboard(found):
+    """Get list of specialities from SupaBase"""
+    spec_markup = types.InlineKeyboardMarkup(row_width=3)
+    family = []
+    for spec in found:
+        family.append(
+            types.InlineKeyboardButton(text=f"{spec.code} {spec.name}", callback_data=f"spec {spec.uuid}")
+        )
+    spec_markup.add(*family)
+    return spec_markup

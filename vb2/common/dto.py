@@ -5,9 +5,9 @@ class SupaBase(BaseModel):
     uuid: str | int | None = None
     created_at: str | None = None
 
-    def zero(self):
-        self.uuid = None
-        self.created_at = None
+    # def zero(self):
+    #     self.uuid = None
+    #     self.created_at = None
 
 
 class Categories(SupaBase):

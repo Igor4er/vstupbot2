@@ -18,13 +18,19 @@ def change_dir(dir, rep):
 async def add_user(query):
     """DB is here now!!!"""
     user = query["from"]
+    try:
+        language = query.data
+    except Exception as e:
+        print(e)
+        language = "ua"
     row = {
         "uuid": user["id"],
         "first_name": user["first_name"],
         "last_name": user["last_name"],
         "username": user["username"],
-        "language": query.data,
+        "language": language,
     }
+    print(row)
     await users.update_or_create(Users(**row))
 
 
